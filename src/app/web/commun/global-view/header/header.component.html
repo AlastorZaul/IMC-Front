@@ -1,0 +1,43 @@
+<header class="sirc-header">
+  <!-- HEADER MD+ -->
+  <div class="header-full container p-1 d-none d-md-block">
+    <div class="header-row row no-gutters d-flex align-items-center">
+      <div class="header-logo-container pr-1">
+        <a [routerLink]="['/accueil']">
+          <div class="header-logo-box d-flex align-items-center">
+            <img src="assets/images/logo_Marianne.jpg" />
+          </div>
+        </a>
+      </div>
+      <div class="header-title-container m-1 pr-2">
+        <div class="title">Télé<span class="bold">RC</span></div>
+      </div>
+      <div class="header-infos-container col">
+        <div class="subtitle">
+          Le service de saisie d'une demande <br/>
+          d'<span class="bold">homologation de rupture conventionnelle individuelle</span>
+        </div>                   
+      </div>
+    </div>
+  </div>
+  <!-- HEADER MOBILE-->
+  <div class="header-mobile container p-1 d-block d-md-none">
+    <div class="header-row row no-gutters d-flex align-items-center">
+      <div class="header-logo-container pr-1 col-4">
+        <a [routerLink]="['/accueil']">
+          <div class="header-logo-box d-flex align-items-center">
+            <img src="assets/images/logo_Marianne.jpg" />
+          </div>
+        </a>
+      </div>
+      <div class="header-title-container col-8 d-flex align-items-center mt-1">
+        <div class="title">Télé<span class="bold">RC</span></div>
+      </div>
+      <div class="header-infos-container col-12 mt-1">
+        <div class="subtitle">
+          Le service de saisie d'une demande d'<span class="bold">homologation de rupture conventionnelle individuelle</span>
+        </div>                   
+      </div>
+    </div>
+  </div>
+</header>

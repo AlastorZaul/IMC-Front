@@ -1,0 +1,19 @@
+// Externalized configuration file for SIRC2 custom style 
+
+/* Imports - Bootstrap and override variables */
+@import "partials/custom_sirc2p_variables.scss";
+@import "node_modules/bootstrap/scss/bootstrap";
+
+/* Imports - others*/
+// L'import des éléments suivants est fait dans le fichier angular.json : MaterialIcon, Toaster...
+@import "partials/custom_sirc2p_material.scss";
+
+/* SIRC2 STYLE - GLOBAL */
+@import "partials/sirc2p_global_style.scss";
+/* PAGES */
+@import "partials/sirc2p_style_commun.scss";
+@import "partials/sirc2p_page_demande.scss";
+@import "partials/sirc2p_page_simu_suivi.scss";
+@import "partials/sirc2p_page_espace_documentaire.scss";
+
+

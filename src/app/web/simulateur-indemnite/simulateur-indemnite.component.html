@@ -1,0 +1,141 @@
+<app-fil-ariane [filAriane]="filAriane" [accueilVisible]="true"></app-fil-ariane>
+<h1 class="mb-2">Quelle indemnité légale ?</h1>
+<div [formGroup]="modeleForm">
+
+  <div class="sirc-block-p2 mb-2">
+    <div class="row">
+      <div class="col-12">
+        <label class="mb-2 italic text-justify">
+          <p>A l’occasion de la rupture conventionnelle de son contrat de travail, 
+            le salarié doit percevoir une «indemnité spécifique de rupture conventionnelle» dont le montant, 
+            éventuellement négocié avec l’employeur, ne peut être inférieur :</p>
+            <ul>
+              <li>soit, à l’indemnité légale de licenciement, 
+                soit, 1/4 de mois de salaire par année d’ancienneté pour les années jusqu'à 10 ans et 1/3 de mois 
+                de salaire par année d'ancienneté pour les années à partir de 10 ans (article R. 1234-2 du code du travail).</li>
+            </ul>
+            <ul>
+              <li>soit, à l’indemnité de licenciement prévue par la convention collective, 
+                lorsque cette dernière est plus élevée que l’indemnité légale. 
+                Il vous appartient de vérifier les modalités d’application de cette indemnité.</li>
+            </ul> 
+        </label>
+        <h4 class="mb-1">Ancienneté du ou de la salariée...</h4>
+        <div class="row">
+          <div class="sirc-fc-lg no-result" *ngIf="!isAncienneteValide() || !isMoisDernierMoisValide || !isAnneeDernierMoisValide()">
+            <div class="warning bold mb-2">
+              Le calcul de l'indemnité n'a pas été réalisé : veuillez renseigner la totalité des champs du présent encart.
+            </div>
+          </div>
+          <div class="sirc-fc-sm">
+            <label class="sirc-label">Nombre d'années</label>
+            <input class="sirc-field" type="number" formControlName="ancienneteAnnee"
+                  (focusout)="focusOutAncienneteDerniereAnnee($event.target.value)"
+                  [ngClass]="{'warn' : !isAncienneteValide()}"> 
+          </div>
+          <div class="sirc-fc-sm">
+            <label class="sirc-label">Nombre de mois</label>
+            <input class="sirc-field" type="number" max="11" formControlName="ancienneteMois"
+                  (focusout)="focusOutAncienneteDernierMois($event.target.value)"
+                  [ngClass]="{'warn' : !isAncienneteValide()}">
+          </div>
+        </div>
+        <h4 class="mt-1 mb-1">Dernier mois rémunéré</h4>
+        <div class="row">
+          <div class="sirc-fc-xsm">
+            <label class="sirc-label">Mois</label>
+            <mat-select class="sirc-field" formControlName="moisDernierMois"
+                        [ngClass]="{'warn' : !isMoisDernierMoisValide()}">
+              <mat-option [value]="null" title=""></mat-option>
+              <mat-option *ngFor="let m of MOIS" [value]="m.ordre" title="{{m.intitule}}">{{m.intitule}}</mat-option>
+            </mat-select>
+          </div>
+          <div class="sirc-fc-xsm">
+            <label class="sirc-label">Année</label>
+            <mat-select class="sirc-field" formControlName="anneeDernierMois"
+                        [ngClass]="{'warn' : !isAnneeDernierMoisValide()}">
+              <mat-option [value]="null" title=""></mat-option>
+              <mat-option *ngFor="let y of ANNEES" [value]="y" title="{{y}}">{{y}}</mat-option>
+            </mat-select>
+          </div>
+          <div class="sirc-fc-sm">
+            <label class="sirc-label">Rémunération brute (en euros)</label>
+            <input class="sirc-field" type="number" formControlName="remunerationDernierMois" 
+                  (focusout)="focusOutRemunerationDernierMois()">
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+ 
+    <!-- Rémunération brute des 12 derniers mois -->
+  <div class="sirc-block-p2 mb-2">
+    <div class="row">
+      <div class="col">
+        <h4 class="mb-1">Rémunération brute des 12 derniers mois</h4>
+        <div class="row">
+          <div class="sirc-fc-lg no-result" *ngIf="!moisAnneeRemuneration || !moisAnneeRemuneration.length">
+            <div class="warning bold mb-2">
+              Veuillez renseigner les champs de l'encart précédent pour initialiser le tableau des rémunérations.
+            </div>
+          </div>
+          <div class="sirc-fc-lg no-result" *ngIf="!isAllCaseMoisRemunValides()">
+            <div class="warning bold mb-1">
+              Erreur dans le calcul de la rémunération mensuelle brute moyenne : veuillez renseigner les champs du tableau de rémunération.
+            </div>
+          </div>
+          <div class="sirc-fc-xsm" *ngFor="let mr of moisAnneeRemuneration; let i = index">
+            <label class="sirc-label" [ngClass]="{'white' : isCaseInactive(i)}">{{mr.mois}} {{mr.annee}}</label>
+            <input class="sirc-field" type="number" step='0.01' formControlName="mois{{i+1}}Valeur" 
+              [ngClass]="{'inactif-input': isCaseInactive(i),
+                          'premiers-mois-renum': i <= 2,
+                          'warn' : !isCaseMoisRemunValide(i)}" 
+              [readonly]="isCaseInactive(i)"
+              (change)="calculRemunerationMoyenne()">
+          </div>
+          
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-12">
+        <h4 class="mt-1 mb-1">Dont Primes</h4>
+        <div class="row">
+          <div class="sirc-fc-md">
+            <label class="sirc-label">Primes annuelles/exceptionnelles au cours des 3 mois les plus récents</label>
+            <input class="sirc-field" type="number" formControlName="prime"
+                   (change)="calculRemunerationMoyenne()">
+          </div>
+        </div>
+        <div class="row no-gutters">
+          <div class="sirc-fc-lg sirc-block-calcul-automatique mt-2">
+            <label class="d-flex align-items-center">Résultat du calcul automatique (moyenne) :  
+              <span class="sirc-label rem-men-aut"> {{moyenneRemunerationMensuelleAutomatique?.toFixed()}} € </span></label>
+          </div>
+        </div>
+        <div class="row no-gutters">
+          <div class="sirc-fc-lg sirc-block-calcul-automatique mt-1">
+            <div class="ar-item-desc" >Pour un ou une salariée ayant l'ancienneté et les rémunérations indiquées ci-dessus, 
+                                        le montant minimal correspondant à l'indemnité légale s'élève à (montant brut)</div>
+            <label class="d-flex align-items-center">Indemnité légale :  
+              <span class="sirc-label rem-men-aut"> {{indemniteLegale?.value}} € </span></label> 
+          </div>
+        </div>
+      </div>
+      <div class="p-1 mt-1 col-12">
+          <label class="italic ar-item-desc">
+            Ce résultat ne tient pas compte des situations particulières(notamment alternance de périodes à temps complet et de périodes à temps partiels..)
+            qui conduisent à un calcul différent de l'indemnité.
+          </label>
+          
+          <label class="italic ar-item-desc">
+            Cette estimation ne porte que sur l'indemnité légale. Assurez-vous que la convention collective applicable ne prévoit pas le versement
+            d'une indemnité de rupture plus élevée que le minimum légal et que l'employeur n'est pas alors tenu de verser cette indemnité
+            conventionnelle. Un contrôle du respect du minimum conventionnel sera en effet effectué lors de l'instruction de la demande
+            d'homologation par le service compétent.
+          </label>
+      </div>
+    </div>
+  </div>
+
+</div>  

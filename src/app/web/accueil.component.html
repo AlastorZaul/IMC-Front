@@ -1,0 +1,95 @@
+<app-fil-ariane [filAriane]="filAriane" [accueilVisible]="true"></app-fil-ariane>
+
+<div class="sirc-page-body row">
+  <div class="col mt-md-0">
+        <!-- MESSAGE INFO-->
+      <div class="border border-success mb-1">
+        <div class="sirc-block message-info-block">
+          <h3>Bloc d'information en temps réel</h3>
+          <label class="sirc-info">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. 
+                                  Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. 
+                                  Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.</label>
+        </div>
+      </div>
+      
+      <div class="col-12">
+        <h1>Texte d'introduction au service.</h1>
+        <label class="sirc-label">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. 
+            Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. 
+            Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.</label>
+      </div>
+      
+      <div class="mt-2">
+        <button class="btn-sirc-o" (click)="ouvrirModale()">Renseigner et transmettre une demande</button>
+        <div class="ar-item-desc">Votre demande sera instruite par le service compétent à compter de la réception du formulaire papier</div>
+      </div>
+      
+      <div class="ar-item-container mt-3 mb-1 col-12 col-md-10">
+          <div class="row no-gutters">
+            <div class="ar-icone">
+              <i class="">
+                
+              </i>
+            </div>
+            <div class="ar-item-infos-container col">
+              <div class="row">
+                <div class="ar-item-titre fake-link col-12" (click)="ouvrirHomologation()">
+                  Suivre une demande d'homologation
+                </div>
+                <div class="ar-item-desc col-12">
+                  Vous pourrez suivre le statut de votre demande d'homologation. Vous pourrez également télécharger et imprimer (format pdf)
+                  une attestation d'homologation à l'issue de délai d'instruction (15 jours ouvrables après reception de votre demande).
+                </div>
+              </div>
+            </div>
+          </div>
+      </div>
+      
+      <div class="sirc-block mt-3">
+        <h3 class="mt-2">Voir Aussi</h3>
+          <div class="ar-icone">
+            <i class="">
+            
+            </i>
+          </div>
+          <div class="ar-item-infos-container col mb-2 mt-2">
+            <div class="row">
+              <div class="ar-item-titre fake-link col-12" (click)= "ouvrirDelais()">
+              Faire une simulation pour connaitre les délais de rétractation et d'homologation
+              </div>
+            </div>  
+          </div>
+          <div class="ar-icone">
+            <i class="">
+                
+            </i>
+          </div>
+          <div class="ar-item-infos-container col mb-2">
+            <div class="row">
+              <div class="ar-item-titre fake-link col-12" (click)= "ouvrirIndemnite()">
+                Faire une simulation pour connaitre le montant de l'indemnité légale
+              </div>
+            </div>  
+          </div>
+            <div class="ar-icone">
+              <i class="">
+                    
+              </i>
+            </div>
+            <div class="ar-item-infos-container col mb-2">
+              <div class="row">
+                <div class="ar-item-titre fake-link col-12" click="ouvrirEspaceDoc()">
+                    Tout savoir sur la rupture conventionnelle
+                </div>
+              </div>  
+            </div>  
+      </div>
+      
+
+
+
+
+
+
+  </div>
+</div>

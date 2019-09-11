@@ -1,0 +1,52 @@
+<app-fil-ariane [filAriane]="filAriane" [accueilVisible]="true"></app-fil-ariane>
+<h1 class="mb-2">Suivre une demande d'homologation</h1>
+<div class="sirc-block-p2" *ngIf="!show">
+  <form [formGroup]="modeleForm" >
+    <div class="row d-flex align-items-end" >
+      <div class="sirc-fc-sm">
+        <label class="sirc-label">Numéro de la demande</label>
+        <input class="sirc-field" type="text" minlength="12"  placeholder="ex: 200 400 030" formControlName="numeroDem">
+      </div>
+      <div class="sirc-fc-sm">  
+        <label class="sirc-label mt-1 mt-sm-0">SIRET ou numéro de cotisant ou nom du salarié</label>
+        <input class="sirc-field" type="text" minlength="14" formControlName="numeroSiret">
+      </div>
+      <div class="col-12 mt-2">
+      <button class="btn-sirc-o btn-small mr-2" type="button" (click)="onRecup()" 
+      [ngClass]="{'disabled' : !numeroDem?.value || !numeroSiret?.value}">Charger la demande</button>
+      <button class="btn-sirc btn-small mt-1 mt-sm-0" type="reset">Annuler</button>
+      </div>
+    </div>
+  </form>  
+</div>
+
+<div class="sirc-block-homologation-p2  border-primary" *ngIf="show">
+  <form [formGroup]="modeleForm">
+    <div class="row">
+        
+        <div class="btn-sirc-retour">
+        <button class="btn-sirc-o no-outline btn-small-suivi" type="button" (click)="onRetour()">Ouvrir une autre demande</button>
+        </div>
+        
+        <h3 class="col-12 mt-2">George de la Jungle</h3>
+
+        <div class="sirc-fc-sm">
+          <label>Demande numéro:</label>  
+          <span class="sirc-label italic bold"> {{numeroDem?.value}} </span>
+        </div>
+        <div class="sirc-fc-sm">
+          <label>Employeur:</label>  
+          <span class="sirc-label italic bold"> IMC </span>
+        </div>
+        <div class="sirc-fc-sm"> 
+          <label>Statut de la demande:</label>    
+          <span class="sirc-label italic bold"> en cours de traitement </span>
+        </div> 
+        <div class="col-12 mt-2">
+          <button class="btn-sirc-o btn-small mr-2" type="button">Consulter le CERFA</button>
+          <button class="btn-sirc-o btn-small inactif mt-1 mt-sm-0" type="button">Imprimer les attestations</button>
+        </div>
+
+    </div>
+  </form>
+</div>

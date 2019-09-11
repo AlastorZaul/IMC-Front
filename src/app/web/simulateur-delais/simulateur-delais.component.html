@@ -1,0 +1,88 @@
+<app-fil-ariane [filAriane]="filAriane" [accueilVisible]="true"></app-fil-ariane>
+
+<div class="sirc-page-body row" *appSircLoader="loading">
+  <div class="col mt-0" >
+    <h1 class="mb-2">Faites votre simulation des délais de rétractation et d'homologation à respecter</h1>
+    <form [formGroup]="modeleForm">
+    <div class="sirc-block-p2 mb-2" >
+      <div class="row">
+        <div class="col-12 italic text-justify">
+          <p>La loi prévoit la possibilité, pour l'employeur comme pour le salarié, 
+            de se rétracter dans un délai de <span class="bold">15 jours calendaires (tous les jours comptent)</span>.<br/>
+            Ce délai commence à courir à compter du lendemain de la signature manuscrite du formulaire.<br/>
+            Lorsque le dernier jour du délai tombe un samedi, un dimanche ou un jour férié ou chômé, 
+            il est prorogé jusqu'au premier jour ouvrable suivant. 
+            Ce droit de rétractation est exercé sous la forme d'un écrit (lettre) adressé par tout moyen permettant 
+            d'attester de sa date de réception par l'autre partie.<br/> 
+            Pour se prémunir de toute difficulté, la partie qui souhaite se rétracter a intérêt à le faire par lettre recommandée 
+            avec demande d'avis de réception ou par lettre remise à l'autre partie en main propre contre décharge, 
+            signée et mentionnant la date de remise.
+          </p>
+        </div>
+      </div>
+    </div>
+    <div class="sirc-block-p2 mb-2" >
+        <div class="row d-flex align-items-center">
+        <div class="sirc-fc-sm">
+          <label class="sirc-label">Le formulaire est signé par les parties le...</label>
+          <div class="sirc-date-field-container">
+            <input class="sirc-field" [matDatepicker]="pickerDateSignature" formControlName="dateSignature" />
+            <mat-datepicker-toggle [for]="pickerDateSignature"></mat-datepicker-toggle>
+            <mat-datepicker #pickerDateSignature></mat-datepicker>    
+          </div>
+          <button class="btn-sirc btn-small mt-1" type="button" (click)="onCalcul(dateSignature)" 
+            [ngClass]="{'disabled' : !dateSignature?.value}">Lancer le calcul</button>
+        </div>
+        <div class="simu-delai-arrow m-1 d-none d-md-block" *ngIf="showResultats">
+          <i class="material-icons">arrow_forward</i>
+        </div> 
+        <div class="col-12 col-md mt-2 mt-md-0" *ngIf="showResultats">
+          <div class="row">
+            <div class="col-12">
+              <div class="simu-delai-texte-date">Les parties peuvent <span class="bold">se rétracter</span> pendant 15 jours calendaires, soit jusqu'au :</div>
+              <div class="simu-delai-date bottom-border">
+                <label class="sirc-label">
+                  {{(dateFinDelaiRetractation)? (dateFinDelaiRetractation.value | date:'dd/MM/y') : ''}}
+                </label>
+              </div>
+            </div>
+    
+            <div class="col-12 mt-1">
+                <div class="simu-delai-texte-date">Le formulaire peut être <span class="bold">adressé au service instructeur</span> dès le lendemain, soit à compter du : </div>
+                <div class="simu-delai-date bottom-border">
+                  <label class="sirc-label">
+                    {{(dateEnvoiFormulaire)? (dateEnvoiFormulaire.value | date:'dd/MM/y') : ''}}
+                  </label>
+                </div>
+            </div>
+    
+            <div class="col-12 mt-1">
+                <div class="simu-delai-texte-date">Si vous envoyez le formulaire via le portail <span class="bold">(télétransmission)</span> le : </div>
+                <div class="simu-delai-date bottom-border">
+                  <label class="sirc-label">
+                    {{(dateEnvoiFormulaire)? (dateEnvoiFormulaire.value | date:'dd/MM/y') : ''}}
+                  </label>
+                </div>
+            </div>
+    
+            <div class="col-12 mt-1">
+              <div class="simu-delai-texte-date">La <span class="bold">rupture du contrat</span> peut intervenir au plus tôt le lendemain de la fin du délai d'instruction 
+                de 15 jours ouvrables, soit au plus tôt le : </div>
+              <div class="simu-delai-date">
+                <label class="sirc-label">
+                  {{(dateFinDelaiInstruction?.value)? (dateFinDelaiInstruction?.value | date:'dd/MM/y') : ''}}
+                </label>
+              </div>
+            </div>
+          </div>
+        </div>
+        
+        <label class="col-12 sirc-info mt-2">
+          Si vous adressez votre formulaire par voie postale, il faudra tenir compte des délais postaux car le délai d'homologation ne commence
+          à courir qu'à partir de la réception du formulaire par le service compétent.
+        </label>
+      </div>      
+    </div>
+  </form>
+  </div>
+</div>

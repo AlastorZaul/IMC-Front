@@ -1,0 +1,18 @@
+.simu-delai-arrow {
+    i {
+        font-size: $font-size-icon-btn-big;
+    }
+}
+.simu-delai-texte-date {
+    font-size: $font-size-scale;
+}
+.simu-delai-date {
+    text-align: center;
+    padding-top: 0.5rem;
+    label {
+        font-size: 1.5rem;
+    }
+    &.bottom-border {
+        border-bottom: 1px solid $sirc-grayml;
+    }
+}

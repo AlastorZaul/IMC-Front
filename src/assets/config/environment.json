@@ -1,0 +1,10 @@
+{
+    "titleWebSite": {
+        "suffix" : " | TéléRC",
+        "default" : "TéléRC - Service de saisie d'une demande d'homologation de rupture conventionnelle individuelle"
+    },
+    "socleBaseUrl": "http://localhost:8081/api",
+    "jsonConverterConfig": {
+        "operationMode": 0
+    }
+}
